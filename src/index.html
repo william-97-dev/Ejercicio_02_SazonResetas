@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.themealdb.com https://themealdb.com; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none';" />
+  <meta name="color-scheme" content="light" />
+  <title>Sazón — Explorador de recetas</title>
+  <link rel="icon" href="../assets/icon.png" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Menú principal">
+      <div class="brand"><div class="brand-icon"><img src="../assets/icon.png" alt="" /></div><div><strong>Sazón<span>.</span></strong><small>Tu recetario digital</small></div></div>
+      <div class="sidebar-label">MENÚ PRINCIPAL</div>
+      <nav class="side-nav" aria-label="Navegación">
+        <button id="navExplore" type="button" class="side-link active"><span class="nav-emoji" aria-hidden="true">◫</span> Explorar recetas <span class="nav-caret">›</span></button>
+        <button id="navRandom" type="button" class="side-link"><span class="nav-emoji" aria-hidden="true">✧</span> Sorpréndeme <span class="nav-caret">↗</span></button>
+      </nav>
+      <div class="side-divider"></div>
+      <div class="sidebar-label">DESCUBRE MÁS</div>
+      <div class="mini-menu"><span>🍲</span> Platos deliciosos</div>
+      <div class="mini-menu"><span>🥬</span> Opciones saludables</div>
+      <div class="mini-menu"><span>🍰</span> Postres irresistibles</div>
+      <div class="sidebar-bottom"><div class="sidebar-tip"><span class="tip-stars">✦</span><strong>¿Sin ideas para cocinar?</strong><p>Explora nuevas recetas y encuentra tu próxima comida favorita.</p><button type="button" id="tipRandom">Probar mi suerte <span>↗</span></button></div><p class="sidebar-credit"><strong>TheMealDB</strong> · API pública</p></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div class="top-left"><span class="bread-home">Inicio</span><span class="bread-divider">/</span><strong>Explorar recetas</strong></div><div class="top-right"><span class="online-dot"></span> Conectado a TheMealDB <span class="top-avatar">S</span></div></header>
+      <div class="page-content">
+        <section class="welcome"><div><p class="eyebrow">TU COCINA, TU INSPIRACIÓN <span>✦</span></p><h1>¿Qué cocinamos <em>hoy?</em></h1><p class="welcome-desc">Ideas deliciosas, una búsqueda a la vez. Encuentra una receta que te encante.</p></div><div class="welcome-badge" aria-hidden="true">✳<span>¡Buen<br />provecho!</span></div></section>
+
+        <section class="hero-promo" aria-label="Destacado"><div class="promo-copy"><span class="promo-kicker"><span class="small-sparkle">✦</span> DESCUBRE NUEVOS SABORES</span><h2>Una buena receta<br />alegra cualquier día.</h2><p>Explora sabores de todo el mundo desde tu escritorio.</p><button type="button" class="promo-button" id="heroRandom">Receta sorpresa <span>↗</span></button></div><div class="dish-scene" aria-hidden="true"><div class="dish-shadow"></div><div class="dish-plate"><div class="pasta-squiggle a"></div><div class="pasta-squiggle b"></div><div class="pasta-squiggle c"></div><span class="tomato t1"></span><span class="tomato t2"></span><span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span></div><span class="dash d1">✳</span><span class="dash d2">✦</span></div></section>
+
+        <section class="explore" id="exploreSection" aria-labelledby="exploreHeading">
+          <div class="section-heading"><div><div class="section-kicker">ENCUENTRA TU FAVORITA</div><h2 id="exploreHeading">Explorar recetas <span class="heading-spark">✳</span></h2><p class="section-desc">Busca por nombre o combina los filtros para descubrir platos.</p></div><div class="heading-deco">🍴</div></div>
+          <form id="searchForm" class="filter-panel" autocomplete="off">
+            <div class="field search-field"><label for="searchInput">BUSCAR RECETA</label><div class="input-shell"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="searchInput" type="search" maxlength="100" placeholder="Ej. pasta, chicken, cake..." /></div></div>
+            <div class="field select-field"><label for="categorySelect">CATEGORÍA</label><div class="select-shell"><select id="categorySelect"><option value="">Todas las categorías</option></select></div></div>
+            <div class="field select-field"><label for="areaSelect">REGIÓN / PAÍS</label><div class="select-shell"><select id="areaSelect"><option value="">Todas las regiones</option></select></div></div>
+            <div class="filter-actions"><button type="submit" id="searchButton" class="search-button">Buscar <span>↗</span></button><button type="button" id="clearButton" class="clear-button" title="Limpiar búsqueda y filtros">Limpiar</button></div>
+          </form>
+          <div class="results-bar"><div><h3 id="resultsTitle">Recetas para explorar</h3><p id="resultsDescription" aria-live="polite">Cargando recetas...</p></div><div class="results-count" id="resultsCount">— recetas</div></div>
+          <div id="statusMessage" class="status-message" role="status" aria-live="polite" hidden></div>
+          <div id="recipesGrid" class="recipes-grid" aria-live="polite"></div>
+          <div class="pagination" id="pagination" hidden><button type="button" id="prevPage" class="page-nav">← Anterior</button><span id="pageLabel">Página 1 de 1</span><button type="button" id="nextPage" class="page-nav">Siguiente →</button></div>
+        </section>
+        <footer>Hecho con <span>♥</span> y ganas de cocinar. <span class="footer-right">Proyecto · Electron + JavaScript + TheMealDB</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="recipeDialog" class="recipe-dialog" aria-label="Detalle de receta"><div id="dialogContent"></div></dialog>
+</body>
+</html>

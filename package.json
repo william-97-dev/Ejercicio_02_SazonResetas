@@ -1,0 +1,52 @@
+{
+  "name": "sazon-recetas-electron",
+  "version": "1.0.0",
+  "description": "Recetario de escritorio con Electron y la API TheMealDB (proyecto academico)",
+  "main": "main.js",
+  "author": "Proyecto academico",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "node --test tests/*.test.js",
+    "pack:win": "electron-builder --win dir",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "edu.sazon.recetas",
+    "productName": "Sazon Recetas",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Sazon Recetas"
+    }
+  }
+}
